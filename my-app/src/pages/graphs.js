@@ -3,14 +3,14 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../style.css'
 
-class home extends React.Component {
+class graphs extends React.Component {
 
     render() {
         return (
             <div className='Page-cover'>
                 <Box sx={{p:5}}>
                     <Typography variant="h2" component="div" gutterBottom align='center'>
-                        QleverQuencher Home
+                        Graphs
                     </Typography>
                 </Box>
             </div>
@@ -18,4 +18,4 @@ class home extends React.Component {
     }
 }
 
-export default home;
+export default graphs;
