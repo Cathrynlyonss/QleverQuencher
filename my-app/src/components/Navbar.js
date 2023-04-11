@@ -84,7 +84,7 @@ export default function Navbar(){
                             <Typography sx={{ minWidth: 100 }}>About</Typography>
                         </Button>
                         <Button onClick={handleGraphs}>
-                            <Typography sx={{ minWidth: 100 }}>Analytics</Typography>
+                            <Typography sx={{ minWidth: 100 }}>Weekly Statistics</Typography>
                         </Button>
                     </ButtonGroup>
                 </ThemeProvider>
