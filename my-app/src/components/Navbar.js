@@ -7,6 +7,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../img/logo.png';
 import { useNavigate } from "react-router-dom";
+import Grid from '@mui/material/Grid';
 
 const theme = createTheme({
   palette: {
@@ -48,7 +49,32 @@ export default function Navbar(){
                 },
                 }}
              >
-                <img src={logo} alt="logo" width="340" height="auto" /> 
+                <Grid container spacing={2} justifyContent="flex-end">
+                    <Box sx={{p:3, mr: 33}}>
+                        <Grid item xs={12} >
+                            <img src={logo} alt="logo" width="340" height="auto" /> 
+                        </Grid>
+                    </Box>
+                    <Box sx={{p:3}}>
+                        <Grid item xs={12}>
+                            <ThemeProvider theme={theme}>
+                            <ButtonGroup variant="contained" aria-label="outlined button group" color="primary" position='absolute'>
+                                <Button variant="contained">
+                                    <Typography variant="subtitle2" component="div" gutterBottom align='center'>
+                                        Login
+                                    </Typography>
+                                </Button>
+                                <Button variant="contained">
+                                    <Typography variant="subtitle2" component="div" gutterBottom align='center'>
+                                        Sign Up
+                                    </Typography>
+                                </Button>
+                            </ButtonGroup>
+                        </ ThemeProvider>
+                        </Grid>
+                    </Box>
+                    
+                </Grid>
                 <ThemeProvider theme={theme}>
                     <ButtonGroup color= "primary" variant="text" aria-label="text button group">
                         <Button onClick={handleHome}>
@@ -58,7 +84,7 @@ export default function Navbar(){
                             <Typography sx={{ minWidth: 100 }}>About</Typography>
                         </Button>
                         <Button onClick={handleGraphs}>
-                            <Typography sx={{ minWidth: 100 }}>Graphs</Typography>
+                            <Typography sx={{ minWidth: 100 }}>Analytics</Typography>
                         </Button>
                     </ButtonGroup>
                 </ThemeProvider>
