@@ -5,6 +5,8 @@ import About from './pages/about';
 import Home from './pages/home';
 import Graphs from './pages/graphs';
 import Navbar from './components/Navbar';
+import Login from './pages/login';
+import SignUp from './pages/signup';
 
 class App extends React.Component{
   render(){
@@ -16,6 +18,8 @@ class App extends React.Component{
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<Home />} />
           <Route path="/graphs" element={<Graphs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     )
