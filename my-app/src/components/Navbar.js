@@ -36,6 +36,16 @@ export default function Navbar(){
         navigate("/graphs");
     }
 
+    const handleLogin = (event) => {
+        console.log("Login");
+        navigate("/login");
+    }
+
+    const handleSignUp = (event) => {
+        console.log("Sign Up");
+        navigate("/signup");
+    }
+
 
     return(
         <div>
@@ -59,12 +69,12 @@ export default function Navbar(){
                         <Grid item xs={12}>
                             <ThemeProvider theme={theme}>
                             <ButtonGroup variant="contained" aria-label="outlined button group" color="primary" position='absolute'>
-                                <Button variant="contained">
+                                <Button variant="contained" onClick={handleLogin}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Login
                                     </Typography>
                                 </Button>
-                                <Button variant="contained">
+                                <Button variant="contained" onClick={handleSignUp}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Sign Up
                                     </Typography>
