@@ -1,27 +1,34 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import {Bar} from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
 
-
-
-
-class graphs extends React.Component {
-
-    render() {
-        return (
-            <div style = {{
-                backgroundColor: '#DAEDFF',
-                width: '100vw',
-                height: '100vh'
-            }}>
-                <Box sx={{p:5}}>
-                    <Typography variant="h2" component="div" gutterBottom align='center'>
-                            Graphs
-                    </Typography>
-                </Box>
-            </div>
-        )
+const state = {
+  labels: ['Sunday', 'Monday', 'Tuesday',
+           'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  datasets: [
+    {
+      label: 'Amount of Water Consumed',
+      borderWidth: 1,
+      data: [12, 19, 3, 5, 2, 3, 5]
     }
+  ]
 }
 
-export default graphs;
+export default class graph extends React.Component {
+  render() {
+    return (
+      <div>
+        <Bar
+          data={state}
+          options={{
+            scales: {
+                y: {
+                  beginAtZero: true
+                },
+              },
+          }}
+        />
+      </div>
+    );
+  }
+}
