@@ -1,15 +1,14 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import 'chartjs-adapter-moment';
 
 const state = {
-  labels: ['Sunday', 'Monday', 'Tuesday',
-           'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   datasets: [
     {
       label: 'Amount of Water Consumed',
       borderWidth: 1,
-      data: [1, 1, 3, 5, 2, 3, 5]
+      data: [{x: "2020-02-15 18:37:39", y: 8.25},{x: "2020-02-15 06:37:39", y: 18.25}]
     }
   ]
 }
@@ -28,6 +27,12 @@ export default class graph extends React.Component {
                             y: {
                                 beginAtZero: true
                             },
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'hour'
+                                }
+                            }
                         },
                     }}
                 />

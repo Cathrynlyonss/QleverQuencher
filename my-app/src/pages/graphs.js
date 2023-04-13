@@ -27,7 +27,7 @@ export default class graph extends React.Component {
                       scales: {
                           y: {
                             beginAtZero: true
-                          },
+                          }
                       },
                   }}
                 />
