@@ -31,9 +31,14 @@ export default function Navbar(){
         navigate("/home");
     }
 
-    const handleGraphs = (event) => {
-        console.log("Graph");
-        navigate("/graphs");
+    const handleDaily = (event) => {
+        console.log("Daily");
+        navigate("/daily");
+    }
+
+    const handleWeekly = (event) => {
+        console.log("Weekly");
+        navigate("/weekly");
     }
 
     const handleLogin = (event) => {
@@ -93,7 +98,10 @@ export default function Navbar(){
                         <Button onClick={handleAbout} >
                             <Typography sx={{ minWidth: 100 }}>About</Typography>
                         </Button>
-                        <Button onClick={handleGraphs}>
+                        <Button onClick={handleDaily}>
+                            <Typography sx={{ minWidth: 100 }}>Daily Statistics</Typography>
+                        </Button>
+                        <Button onClick={handleWeekly}>
                             <Typography sx={{ minWidth: 100 }}>Weekly Statistics</Typography>
                         </Button>
                     </ButtonGroup>
