@@ -25,9 +25,17 @@ export default class graph extends React.Component {
                         maintainAspectRatio: false,
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Amount of Water Consumed'
+                                }
                             },
                             x: {
+                                title: {
+                                    display: true,
+                                    text: 'Hours'
+                                },
                                 type: 'time',
                                 time: {
                                     unit: 'hour'
