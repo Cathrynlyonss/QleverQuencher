@@ -17,18 +17,23 @@ const state = {
 export default class graph extends React.Component {
   render() {
     return (
-      <div>
-        <Bar
-          data={state}
-          options={{
-            scales: {
-                y: {
-                  beginAtZero: true
-                },
-              },
-          }}
-        />
-      </div>
+        <center>
+            <div class="chart-wrapper">
+                <Bar
+                  data={state}
+                  options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      scales: {
+                          y: {
+                            beginAtZero: true
+                          },
+                      },
+                  }}
+                />
+            </div>
+        </center>
+      
     );
   }
 }
