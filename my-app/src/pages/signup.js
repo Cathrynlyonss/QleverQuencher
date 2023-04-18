@@ -16,10 +16,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import '../config/firebase.js'
-import {Navigate} from 'react-router-dom';
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { auth } from "../config/firebase";
+
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const theme = createTheme({
@@ -66,7 +63,8 @@ export default function Signup() {
   };
 
   const getHeightInInches = (feet, inches) => {
-    return feet * 12 + inches;
+    height = feet * 12 + inches;
+    setHeight(height);
     };
 
   return (
