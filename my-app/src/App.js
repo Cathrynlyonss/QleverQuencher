@@ -8,8 +8,21 @@ import Navbar from './components/Navbar';
 import Login from './pages/login';
 import SignUp from './pages/signup';
 import Daily from './pages/daily';
+import ProtectedRoutes from './ProtectedRoutes';
 
-class App extends React.Component{
+const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={(props) => {
+        return loggedIn ? <Comp {...props} /> : <Navigate to="/" />;
+      }}
+    />
+  );
+};
+
+class App extends React.Component {
   render(){
     return(
       <div className="App">
@@ -18,8 +31,10 @@ class App extends React.Component{
           <Route path="/" element={<Navigate to='/home' />} />
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/weekly" element={<Weekly />} />
-          <Route path="/daily" element={<Daily />} />
+          <Route element = {<ProtectedRoutes/>}> 
+            <Route path="/weekly" element={<Weekly />} />
+            <Route path="/daily" element={<Daily />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
