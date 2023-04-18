@@ -81,17 +81,6 @@ export default function Signup() {
     >
       <ThemeProvider theme={theme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Box
-            component="form"
-            b
-            onSubmit={handleFormSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              margin: "auto",
-              width: "50%",
-            }}
-          >
             <Typography
               variant="h2"
               component="div"
@@ -198,7 +187,6 @@ export default function Signup() {
             >
               SignUp
             </Button>
-          </Box>
         </LocalizationProvider>
       </ThemeProvider>
     </div>
