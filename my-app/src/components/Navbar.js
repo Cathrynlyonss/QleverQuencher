@@ -65,6 +65,19 @@ export default function Navbar(){
         navigate("/signup");
     }
 
+    const handleLogout = (event) => {
+        console.log("Logout");
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("Logout successful")
+        }).catch((error) => {
+            // An error happened.
+            console.log("Error: " + error)
+        });
+        navigate("/home");
+    }
+
 
     return(
         <div>
@@ -96,6 +109,11 @@ export default function Navbar(){
                                 <Button variant="contained" onClick={handleSignUp}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Sign Up
+                                    </Typography>
+                                </Button>
+                                <Button variant="contained" onClick={handleLogout}>
+                                    <Typography variant="subtitle2" component="div" gutterBottom align='center'>
+                                        Logout
                                     </Typography>
                                 </Button>
                             </ButtonGroup>

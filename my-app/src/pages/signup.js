@@ -16,7 +16,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import '../config/firebase.js'
-
+import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const theme = createTheme({
@@ -38,7 +38,7 @@ export default function Signup() {
   const [birthday, setBirthday] = React.useState(null);
   const [phoneNum, setPhoneNum] = useState(undefined);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const auth = getAuth();
 
   const handleChange = (event, newAlignment) => {
@@ -53,12 +53,14 @@ export default function Signup() {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        console.log("login successful")
+        navigate("/daily")
         // ...
       });
     } catch (error) {
       alert(`Cannot submit form: ${error.message}`);
     }
-    
+    //put other data in database with unique id being email
     
   };
 
