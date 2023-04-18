@@ -16,6 +16,11 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import '../config/firebase.js'
+import {Navigate} from 'react-router-dom';
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { auth } from "../config/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const theme = createTheme({
   palette: {
@@ -34,18 +39,35 @@ export default function Signup() {
   const [inches, setInches] = useState("");
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = React.useState(null);
+  const [phoneNum, setPhoneNum] = useState(undefined);
+  const [error, setError] = useState("");
+
+  const auth = getAuth();
 
   const handleChange = (event, newAlignment) => {
     setGender(newAlignment);
   };
 
-  const handleFormSubmit = (event) => {
+  function handleFormSubmit(e) {
     console.log("Form submitted");
+    const auth = getAuth();
+    try{
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      });
+    } catch (error) {
+      alert(`Cannot submit form: ${error.message}`);
+    }
+    
+    
   };
 
   const getHeightInInches = (feet, inches) => {
     return feet * 12 + inches;
-    };  
+    };
 
   return (
     <div
@@ -130,8 +152,10 @@ export default function Signup() {
               aria-label="Platform"
               margin="20px"
             >
-              <ToggleButton value="Female">Female</ToggleButton>
-              <ToggleButton value="Male">Male</ToggleButton>
+              <ToggleButton value="F">Female</ToggleButton>
+              <ToggleButton value="M">Male</ToggleButton>
+              <ToggleButton value="O">Other</ToggleButton>
+              <ToggleButton value="P">Prefer Not To Say</ToggleButton>
             </ToggleButtonGroup>
             <Box sx={{p: 2}}>
               <TextField
@@ -160,13 +184,19 @@ export default function Signup() {
                 onChange={(e) => setInches(e.target.value)}
               />
             </Box>
+            <TextField
+                sx={{ mb: "20px" }}
+                type="number"
+                label="Phone Number"
+                variant="outlined"
+                value={phoneNum}
+                onChange={(e) => setPhoneNum(e.target.value)}
+                />
             <Button
               variant="contained"
               type="submit"
               sx={{ ml: "20px", p: "2px" }}
-              onClick={(event) => {
-                console.log(inches);
-              }}
+              onClick={handleFormSubmit}
             >
               SignUp
             </Button>

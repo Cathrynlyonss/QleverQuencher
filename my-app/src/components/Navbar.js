@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../img/logo.png';
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
+import { getAuth, signOut } from "firebase/auth";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,19 @@ const theme = createTheme({
 export default function Navbar(){
 
     const navigate = useNavigate();
+
+    const logout = () => {
+        console.log("Logout");
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("Logout successful")
+        }).catch((error) => {
+        // An error happened.
+        console.log("Error: " + error)
+        });
+        navigate("/home");
+    }
 
     const handleAbout = (event) => {
         console.log("About");

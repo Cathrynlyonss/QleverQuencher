@@ -13,6 +13,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const theme = createTheme({
   palette: {
@@ -31,12 +32,25 @@ export default function Login() {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+    const auth = getAuth();
+    
+
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
     const handleFormSubmit = (event) => {
         console.log("Form submitted");
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
     }
 
         return (
