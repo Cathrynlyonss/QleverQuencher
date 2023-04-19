@@ -15,9 +15,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import '../config/firebase.js'
+import { db } from '../config/firebase.js'
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; 
 
 const theme = createTheme({
   palette: {
@@ -45,7 +46,7 @@ export default function Signup() {
     setGender(newAlignment);
   };
 
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     console.log("Form submitted");
     const auth = getAuth();
     try{
@@ -57,6 +58,16 @@ export default function Signup() {
         navigate("/daily")
         // ...
       });
+
+      getHeightInInches(feet, inches)
+      await setDoc(doc(db, "Users", email), {
+        birthday: birthday,
+        gender: gender,
+        height: height,
+        weight: weight,
+        phone: phoneNum
+      });
+
     } catch (error) {
       alert(`Cannot submit form: ${error.message}`);
     }
