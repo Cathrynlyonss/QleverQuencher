@@ -2,7 +2,10 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../config/firebase.js'
 
+getData();
 const state = {
   datasets: [
     {
@@ -12,6 +15,20 @@ const state = {
     }
   ]
 }
+
+//functions to read in data from firestore
+async function getData() {
+    const docRef = doc(db, "Users", "lyonsc20");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+    }
+}
+
 
 export default class graph extends React.Component {
   render() {
