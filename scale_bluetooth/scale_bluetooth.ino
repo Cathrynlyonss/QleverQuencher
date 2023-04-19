@@ -122,6 +122,7 @@ void loop(void)
         if (! ble.waitForOK() ) {
           Serial.println(F("Failed to send?"));
         } 
+        delay(20000);
       }
       else{
         Serial.println("Scale not found");
@@ -129,7 +130,7 @@ void loop(void)
       
     }
     
-    delay(2000);
+    
   }
   
 }
