@@ -9,18 +9,19 @@ import Login from './pages/login';
 import SignUp from './pages/signup';
 import Daily from './pages/daily';
 import ProtectedRoutes from './ProtectedRoutes';
+import Footer from './components/Footer';
 
-const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
-  return (
-    <Route
-      path={path}
-      {...rest}
-      render={(props) => {
-        return loggedIn ? <Comp {...props} /> : <Navigate to="/" />;
-      }}
-    />
-  );
-};
+// const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
+//   return (
+//     <Route
+//       path={path}
+//       {...rest}
+//       render={(props) => {
+//         return loggedIn ? <Comp {...props} /> : <Navigate to="/" />;
+//       }}
+//     />
+//   );
+// };
 
 class App extends React.Component {
   render(){
@@ -38,6 +39,7 @@ class App extends React.Component {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
+        <Footer />
       </div>
     )
   }
