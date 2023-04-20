@@ -8,8 +8,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -32,7 +30,6 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
   const [feet, setFeet] = useState("");
   const [inches, setInches] = useState("");
   const [gender, setGender] = useState("");
@@ -59,11 +56,11 @@ export default function Signup() {
         // ...
       });
 
-      getHeightInInches(feet, inches)
       await setDoc(doc(db, "Users", email), {
         birthday: birthday,
         gender: gender,
-        height: height,
+        feet: feet,
+        inches: inches,
         weight: weight,
         phone: phoneNum
       });
@@ -74,11 +71,6 @@ export default function Signup() {
     //put other data in database with unique id being email
     
   };
-
-  const getHeightInInches = (feet, inches) => {
-    height = feet * 12 + inches;
-    setHeight(height);
-    };
 
   return (
     <div
@@ -118,15 +110,16 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  value={birthday}
-                  onChange={(newBirthday) => setBirthday(newBirthday)}
-                  sx={{ mb: "20px" }}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
+            
+              
+            <TextField
+              label="Birthday (MM/DD/YYYY)"
+              variant="outlined"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              sx={{ mb: "20px" }}
+             />
+            
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-weight"
@@ -205,3 +198,4 @@ export default function Signup() {
     </div>
   );
 }
+
