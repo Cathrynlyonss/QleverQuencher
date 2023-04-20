@@ -65,7 +65,11 @@ async function main( )
         console.log('Received: ' + buffer.toString());
 
         var updates = {}
-        updates['/hi'] = String(buffer);
+        updates['/weight'] = String(buffer);
+
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        updates['/time'] = String(time)
         //send updated info to db
         update(ref(database), updates)
     });
