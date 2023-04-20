@@ -63,7 +63,9 @@ export default function Signup() {
         feet: feet,
         inches: inches,
         weight: weight,
-        phone: phoneNum
+        phone: phoneNum,
+        intakeAmount: [],
+        intakeTime: []
       });
 
     } catch (error) {
