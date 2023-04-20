@@ -68,16 +68,6 @@ export default function Login() {
             width: '100vw', 
             }} className='Page-cover'>
                 <ThemeProvider theme={theme}>
-                 <Box
-                    component="form"
-                    onSubmit={handleFormSubmit}
-                    style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    margin:"auto",
-                    width:"50%"
-                    }}
-                    >
                     <Typography variant="h2" component="div" gutterBottom align='center'>
                         Login
                     </Typography>
@@ -109,10 +99,10 @@ export default function Login() {
                         variant="contained"
                         type='submit'
                         sx={{ml:"20px"}}
+                        onClick={handleFormSubmit}
                     >
                         Login
                     </Button>
-                </Box>
                 </ThemeProvider>
             </div>
         )
