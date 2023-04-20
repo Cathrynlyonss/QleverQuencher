@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -33,19 +34,21 @@ export default function Login() {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const auth = getAuth();
-    
+    const navigate = useNavigate();
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
     const handleFormSubmit = (event) => {
+        const auth = getAuth();
         console.log("Form submitted");
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
             console.log("login successful")
+            navigate("/daily")
       
             // ...
         })
@@ -65,16 +68,6 @@ export default function Login() {
             width: '100vw', 
             }} className='Page-cover'>
                 <ThemeProvider theme={theme}>
-                 <Box
-                    component="form"
-                    onSubmit={handleFormSubmit}
-                    style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    margin:"auto",
-                    width:"50%"
-                    }}
-                    >
                     <Typography variant="h2" component="div" gutterBottom align='center'>
                         Login
                     </Typography>
@@ -106,10 +99,10 @@ export default function Login() {
                         variant="contained"
                         type='submit'
                         sx={{ml:"20px"}}
+                        onClick={handleFormSubmit}
                     >
                         Login
                     </Button>
-                </Box>
                 </ThemeProvider>
             </div>
         )

@@ -108,11 +108,11 @@ export default function Navbar(){
                                         Login
                                     </Typography>
                                 </Button>}
-                                <Button variant="contained" onClick={handleSignUp}>
+                                {(getAuth().currentUser == null) && <Button variant="contained" onClick={handleSignUp}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Sign Up
                                     </Typography>
-                                </Button>
+                                </Button>}
                                 {(getAuth().currentUser != null) && <Button variant="contained" onClick={handleLogout}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Logout
