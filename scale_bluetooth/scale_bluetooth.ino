@@ -57,7 +57,7 @@ void setup(void)
   //setup scale
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale(466);
-  scale.tare();
+  scale.tare(299);
   delay(500);
   Serial.println("Scale is setup!");
 
@@ -110,6 +110,7 @@ void loop(void)
       Serial.println("Sip taken!");
       
       if (scale.is_ready()){
+        delay(1000);
         long reading = scale.get_units(10);
         Serial.print("Weight: ");
         Serial.println(reading);
@@ -122,7 +123,7 @@ void loop(void)
         if (! ble.waitForOK() ) {
           Serial.println(F("Failed to send?"));
         } 
-        delay(20000);
+        
       }
       else{
         Serial.println("Scale not found");
