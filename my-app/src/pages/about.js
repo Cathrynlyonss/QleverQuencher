@@ -16,11 +16,9 @@ class about extends React.Component {
             }} className='Page-cover'>
                 <Box sx={{p:5}}>
                     <Typography variant="h2" component="div" gutterBottom align='center'>
-                        About QueverQuencher
+                        About Us
                     </Typography>
-                    <Typography variant="subtitle1" component="div" gutterBottom align='center'>
-                        QueverQuencher is a web application that allows users to track their water consumption and meet their daily water intake goals.
-                    </Typography>
+                    
                 </Box>
             </div>
         )
