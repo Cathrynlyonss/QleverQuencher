@@ -28,6 +28,7 @@ export default function Navbar(){
         signOut(auth).then(() => {
             // Sign-out successful.
             console.log("Logout successful")
+            console.log(getAuth())
         }).catch((error) => {
         // An error happened.
         console.log("Error: " + error)
@@ -71,6 +72,7 @@ export default function Navbar(){
         signOut(auth).then(() => {
             // Sign-out successful.
             console.log("Logout successful")
+            console.log(getAuth().currentUser)
         }).catch((error) => {
             // An error happened.
             console.log("Error: " + error)
@@ -101,21 +103,21 @@ export default function Navbar(){
                         <Grid item xs={12}>
                             <ThemeProvider theme={theme}>
                             <ButtonGroup variant="contained" aria-label="outlined button group" color="primary" position='absolute'>
-                                <Button variant="contained" onClick={handleLogin}>
+                            {(getAuth().currentUser == null) && <Button variant="contained" onClick={handleLogin}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Login
                                     </Typography>
-                                </Button>
+                                </Button>}
                                 <Button variant="contained" onClick={handleSignUp}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Sign Up
                                     </Typography>
                                 </Button>
-                                <Button variant="contained" onClick={handleLogout}>
+                                {(getAuth().currentUser != null) && <Button variant="contained" onClick={handleLogout}>
                                     <Typography variant="subtitle2" component="div" gutterBottom align='center'>
                                         Logout
                                     </Typography>
-                                </Button>
+                                </Button>}
                             </ButtonGroup>
                         </ ThemeProvider>
                         </Grid>

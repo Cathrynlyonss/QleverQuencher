@@ -1,14 +1,10 @@
-import { Outlet } from "react-router"
+import Weekly from "./pages/weekly"
 import Login from './pages/login';
-
-const useAuth = () => {
-    const user = {loggedIn: false}
-    return user && user.loggedIn
-};
+import { getAuth, signOut } from "firebase/auth";
 
 const ProtectedRoutes = () => {
-    const isAuth = useAuth();
-    return isAuth ? <Outlet/> : <Login/>
+    const isAuth = getAuth();
+    return (isAuth.currentUser != null) ? <Weekly/> : <Login/>
 };
 
 export default ProtectedRoutes

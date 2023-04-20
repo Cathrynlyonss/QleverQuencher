@@ -46,6 +46,7 @@ export default function Login() {
             // Signed in 
             const user = userCredential.user;
             console.log("login successful")
+      
             // ...
         })
         .catch((error) => {

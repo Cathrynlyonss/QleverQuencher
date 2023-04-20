@@ -52,6 +52,7 @@ export default function Signup() {
         // Signed in 
         const user = userCredential.user;
         console.log("login successful")
+        console.log(getAuth().currentUser)
         navigate("/daily")
         // ...
       });
