@@ -86,7 +86,6 @@ export default function Navbar(){
         navigate("/home");
     }
 
-
     return(
         <div>
             <Box
