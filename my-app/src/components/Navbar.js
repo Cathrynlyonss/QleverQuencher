@@ -66,6 +66,11 @@ export default function Navbar(){
         navigate("/signup");
     }
 
+    const handleGoals = (event) => {
+        console.log("Goals");
+        navigate("/goals");
+    }
+
     const handleLogout = (event) => {
         console.log("Logout");
         const auth = getAuth();
@@ -94,7 +99,7 @@ export default function Navbar(){
                 }}
              >
                 <Grid container spacing={2} justifyContent="flex-end">
-                    <Box sx={{p:3, mr: 33}}>
+                    <Box sx={{p:3, mr: 44}}>
                         <Grid item xs={12} >
                             <img src={logo} alt="logo" width="340" height="auto" /> 
                         </Grid>
@@ -137,6 +142,9 @@ export default function Navbar(){
                         </Button>
                         <Button onClick={handleWeekly}>
                             <Typography sx={{ minWidth: 100 }}>Weekly Statistics</Typography>
+                        </Button>
+                        <Button onClick={handleGoals}>
+                            <Typography sx={{ minWidth: 100 }}>Set Hydration Goals</Typography>
                         </Button>
                     </ButtonGroup>
                 </ThemeProvider>
