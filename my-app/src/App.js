@@ -43,9 +43,9 @@ class App extends React.Component {
           <Route element = {<ProtectedRoutes1/>}> 
             <Route path="/daily" element={<Daily />} />
           </Route>
-          {/* <Route element = {<ProtectedRoutes2/>}> */}
+          <Route element = {<ProtectedRoutes2/>}>
             <Route path="/goals" element={<Goals />} />
-          {/* </Route> */}
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
