@@ -58,11 +58,11 @@ class about extends React.Component {
                     >
                       <p>
                         Hi! I'm Abigail, a senior at the University of
-                        Washington studying Computer Science and Human Centered
-                        Design and Engineering. I'm passionate about creating
-                        technology that is accessible to everyone, and I'm
-                        excited to be a part of the team that is making that
-                        happen!
+                        Iowa studying Electrical and Computer Engineering. 
+                        For this project, I implemented all hardware and components 
+                        that were collecting, sending, and receiving data via
+                        various protocols and helped ensure the data ended up in
+                        the database in a meaningful way.
                       </p>
                     </Typography>
                   </Grid>

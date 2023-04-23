@@ -59,17 +59,23 @@ async function main( )
     // Register for notifications on the RX characteristic
     await rxChar.startNotifications( );
 
+
     // Callback for when data is received on RX characteristic
     rxChar.on( 'valuechanged', buffer =>
     {
         console.log('Received: ' + buffer.toString());
 
         var updates = {}
-        updates['/weight'] = String(buffer);
+        updates['/weight'] = parseInt(buffer);
 
-        var today = new Date();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        updates['/time'] = String(time)
+        var today = new Date()
+        var time = Date.now()
+        updates['/time'] = time
+        updates['/dayofweek'] = today.getDay()
+
+        vartoSend = {y:parseInt(buffer), x:time}
+        updates['/waterConsumption'] = vartoSend
+        
         //send updated info to db
         update(ref(database), updates)
     });
