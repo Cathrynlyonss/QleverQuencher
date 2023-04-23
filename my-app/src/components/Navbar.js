@@ -66,6 +66,11 @@ export default function Navbar(){
         navigate("/signup");
     }
 
+    const handleGoals = (event) => {
+        console.log("Goals");
+        navigate("/goals");
+    }
+
     const handleLogout = (event) => {
         console.log("Logout");
         const auth = getAuth();
@@ -137,6 +142,9 @@ export default function Navbar(){
                         </Button>
                         <Button onClick={handleWeekly}>
                             <Typography sx={{ minWidth: 100 }}>Weekly Statistics</Typography>
+                        </Button>
+                        <Button onClick={handleGoals}>
+                            <Typography sx={{ minWidth: 100 }}>Set Hydration Goals</Typography>
                         </Button>
                     </ButtonGroup>
                 </ThemeProvider>
