@@ -33,7 +33,7 @@ class about extends React.Component {
                                     <Grid item xs={8}>
                                         < img src = {Abigail} height = {200}/>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={3}>
                                         <Typography variant="subtitle1" component="div" gutterBottom align='center'>
                                             <p>Hi! I'm Abigail, a senior at the University of Washington studying Computer Science and Human Centered Design and Engineering. I'm passionate about creating technology that is accessible to everyone, and I'm excited to be a part of the team that is making that happen!</p>
                                         </Typography>
