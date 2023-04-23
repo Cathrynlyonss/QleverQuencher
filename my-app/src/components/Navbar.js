@@ -78,6 +78,7 @@ export default function Navbar(){
             // Sign-out successful.
             console.log("Logout successful")
             console.log(getAuth().currentUser)
+            navigate("/login")
         }).catch((error) => {
             // An error happened.
             console.log("Error: " + error)
