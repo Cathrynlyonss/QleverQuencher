@@ -15,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { db } from '../config/firebase.js'
 import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
 
 const theme = createTheme({
@@ -35,9 +35,7 @@ export default function Signup() {
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = React.useState(null);
   const [phoneNum, setPhoneNum] = useState(undefined);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const auth = getAuth();
 
   const handleChange = (event, newAlignment) => {
     setGender(newAlignment);
@@ -50,7 +48,6 @@ export default function Signup() {
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
         console.log("login successful")
         console.log(getAuth().currentUser)
         navigate("/daily")

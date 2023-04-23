@@ -53,6 +53,7 @@ const theme = createTheme({
             }} className='Page-cover'>
                 <ThemeProvider theme={theme}>
                 <Box sx={{p:5}}>
+                    <OpacityIcon sx={{ fontSize: 100 }} color="primary" />
                     <Typography variant="h2" component="div" gutterBottom align='center'>
                         Hydration Goals
                     </Typography>
