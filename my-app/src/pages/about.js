@@ -30,7 +30,7 @@ class about extends React.Component {
                             <Typography variant="h4" component="div" gutterBottom align='center'>
                                 Abigail Bright
                                 <Grid container spacing={2}>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={7}>
                                         < img src = {Abigail} height = {200}/>
                                     </Grid>
                                     <Grid item xs={3}>
@@ -47,7 +47,7 @@ class about extends React.Component {
                             <Typography variant="h4" component="div" gutterBottom align='center'>
                                 Cathryn Lyons
                                 <Grid container spacing={2}>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={7}>
                                         < img src = {Cathryn} height = {200}/>
                                     </Grid>
                                     <Grid item xs={3}>
@@ -66,7 +66,7 @@ class about extends React.Component {
                             <Typography variant="h4" component="div" gutterBottom align='center'>
                                 Kiana Erickson
                                 <Grid container spacing={2}>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={7}>
                                         < img src = {Kiana} height = {200}/>
                                     </Grid>
                                     <Grid item xs={3}>
@@ -83,7 +83,7 @@ class about extends React.Component {
                             <Typography variant="h4" component="div" gutterBottom align='center'>
                                 Werner Bayas
                                 <Grid container spacing={2}>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={7}>
                                         < img src = {Werner} height = {200}/>
                                     </Grid>
                                     <Grid item xs={3}>
