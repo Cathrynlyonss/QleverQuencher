@@ -24,11 +24,13 @@ const theme = createTheme({
 
 export default function Goals() {
   const [goalOunce, setGoalOunce] = React.useState(0);
+  const [activityLevel, setActivityLevel] = React.useState(0);
   const auth = getAuth();
   const user = auth.currentUser;
+  const [email, setEmail] = React.useState("");
 
   const handleFormSubmit = (event) => {
-    console.log("Submit");
+    console.log("Submit Ounces");
 
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -44,6 +46,32 @@ export default function Goals() {
         console.log("No user signed in");
       }
     });
+  };
+
+  const handleActivitySubmit = (event) => {
+    console.log("SubmitActivity");
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+        const email = user.email;
+        console.log(email);
+        const dbRef = doc(db, "Users", email);
+        await updateDoc(dbRef, {
+          activityAmtDaily: activityLevel,
+        });
+      } else {
+        console.log("No user signed in");
+      }
+    });
+  };
+
+  const getOuncesRecommended = () => {
+    //get user's weight and activity level
+    //weight * 2/3 = ounces recommended
+    //.4 * min of activity = additional added ounces
+    //round up to nearest whole number
+    //return ounces recommended
   };
 
   return (
@@ -78,9 +106,30 @@ export default function Goals() {
             sx={{ ml: "20px", p: "4px" }}
             onClick={handleFormSubmit}
           >
-            Submit
+            Update
           </Button>
         </Box>
+        <Box sx={{ p: 0 }}>
+          <TextField
+            sx={{ mb: "20px" }}
+            type="number"
+            label="Workout Minutes Per Day"
+            variant="outlined"
+            value={activityLevel}
+            onChange={(e) => setActivityLevel(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ ml: "20px", p: "4px" }}
+            onClick={handleActivitySubmit}
+          >
+            Update
+          </Button>
+        </Box>
+        <Typography variant="sh2" component="div" gutterBottom align="center">
+          Recommended Ounces Per Day: {getOuncesRecommended()}
+        </Typography>
       </ThemeProvider>
     </div>
   );

@@ -66,6 +66,7 @@ export default function Signup() {
         intakeAmount: [],
         intakeTime: [],
         goalInOunces: 0,
+        activityAmtDaily: 0,
       });
     } catch (error) {
       alert(`Cannot submit form: ${error.message}`);

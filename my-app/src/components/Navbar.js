@@ -99,7 +99,7 @@ export default function Navbar(){
                 }}
              >
                 <Grid container spacing={2} justifyContent="flex-end">
-                    <Box sx={{p:3, mr: 33}}>
+                    <Box sx={{p:3, mr: 44}}>
                         <Grid item xs={12} >
                             <img src={logo} alt="logo" width="340" height="auto" /> 
                         </Grid>
