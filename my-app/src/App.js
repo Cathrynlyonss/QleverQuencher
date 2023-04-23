@@ -15,19 +15,6 @@ import Footer from './components/Footer';
 import Goals from './pages/goals';
 import { getAuth, signOut } from "firebase/auth";
 
-
-// const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
-//   return (
-//     <Route
-//       path={path}
-//       {...rest}
-//       render={(props) => {
-//         return loggedIn ? <Comp {...props} /> : <Navigate to="/" />;
-//       }}
-//     />
-//   );
-// };
-
 class App extends React.Component {
   render(){
     return(
@@ -40,10 +27,10 @@ class App extends React.Component {
           <Route element = {<ProtectedRoutes/>}> 
             <Route path="/weekly" element={<Weekly />} />
           </Route>
-          <Route element = {<ProtectedRoutes1/>}> 
+          <Route element = {<ProtectedRoutes2/>}> 
             <Route path="/daily" element={<Daily />} />
           </Route>
-          <Route element = {<ProtectedRoutes2/>}>
+          <Route element = {<ProtectedRoutes1/>}>
             <Route path="/goals" element={<Goals />} />
           </Route>
           <Route path="/login" element={<Login />} />
