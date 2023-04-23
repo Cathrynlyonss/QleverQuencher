@@ -1,10 +1,10 @@
-import Daily from "./pages/daily"
+import Goals from "./pages/goals"
 import Login from './pages/login';
 import { getAuth, signOut } from "firebase/auth";
 
-const ProtectedRoutes1 = () => {
+const ProtectedRoutes2 = () => {
     const isAuth = getAuth();
-    return (isAuth.currentUser != null) ? <Daily/> : <Login/>
+    return (isAuth.currentUser != null) ? <Goals/> : <Login/>
 };
 
-export default ProtectedRoutes1
+export default ProtectedRoutes2
