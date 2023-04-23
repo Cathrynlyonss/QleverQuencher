@@ -1,34 +1,50 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
-import { doc, getDoc } from "firebase/firestore";
 import { db } from '../config/firebase.js'
+import { getDatabase, ref, onValue, update} from "firebase/database";
+// import { reload } from 'firebase/auth';
+// import { render } from '@testing-library/react';
 
-getData();
-const state = {
-  datasets: [
-    {
-      label: 'Amount of Water Consumed',
-      borderWidth: 1,
-      data: [{x: "2020-02-15 18:37:39", y: 8.25},{x: "2020-02-15 06:37:39", y: 18.25}]
+
+const database = getDatabase();
+
+const amountRef = ref(database, '/hi' );    
+var data = []
+var prevDays = []
+
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday',
+'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+onValue(ref(database, '/waterConsumption' ), (snapshot) => {
+    data.push(snapshot.val());
+    console.log(data)
+}); 
+
+onValue(ref(database, '/dayofweek' ), (snapshot) => {
+    prevDays = {x: daysOfWeek[snapshot.val()-1], y: data};
+    data = [];
+
+    var updates = {}
+    console.log(prevDays)
+    updates['/prevDays'] = prevDays
+    update(ref(database), updates)
+}); 
+
+function getState(){
+    const state = {
+        datasets: [
+          {
+            label: 'Amount of Water Consumed',
+            borderWidth: 1,
+            //data: [{x: Date.now(), y: data}]
+            data: data
+          }
+        ]
     }
-  ]
+    return state
 }
-
-//functions to read in data from firestore
-async function getData() {
-    const docRef = doc(db, "Users", "lyonsc20");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-    }
-}
-
 
 export default class graph extends React.Component {
   render() {
@@ -36,7 +52,7 @@ export default class graph extends React.Component {
         <center>
             <div class="chart-wrapper">
                 <Line
-                    data={state}
+                    data={getState()}
                     options={{
                         responsive: true,
                         maintainAspectRatio: false,
@@ -63,7 +79,10 @@ export default class graph extends React.Component {
                 />
             </div>
         </center>
+        
       
     );
   }
 }
+
+
