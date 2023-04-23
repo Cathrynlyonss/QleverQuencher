@@ -17,6 +17,7 @@ import { db } from '../config/firebase.js'
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
+import Grid from '@mui/material/Grid';
 
 const theme = createTheme({
   palette: {
@@ -95,15 +96,21 @@ export default function Signup() {
             >
               Signup
             </Typography>
-            <TextField
-              sx={{ mb: "20px" }}
-              type="email"
-              label="Email"
-              variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
+            
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} pl= {74}>
+              <Grid item xs={2} sm={4} md={4}>
+                <Typography>
+                <TextField
+                  sx={{ mb: "20px" }}
+                  type="email"
+                  label="Email"
+                  variant="outlined"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                </Typography>
+                <Typography>
+                <TextField
               sx={{ mb: "20px" }}
               type="password"
               label="Password"
@@ -112,33 +119,37 @@ export default function Signup() {
               onChange={(e) => setPassword(e.target.value)}
             />
             
-              
-            <TextField
+                </Typography>
+                <Typography>
+                <TextField
               label="Birthday (MM/DD/YYYY)"
               variant="outlined"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
               sx={{ mb: "20px" }}
              />
-            
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-weight"
-                endAdornment={
-                  <InputAdornment position="end">lb</InputAdornment>
-                }
-                aria-describedby="outlined-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-                onChange={(e) => setWeight(e.target.value)}
-                value={weight}
-              />
-              <FormHelperText id="outlined-weight-helper-text">
-                Weight
-              </FormHelperText>
-            </FormControl>
-            <ToggleButtonGroup
+                </Typography>   
+                <Typography >
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  endAdornment={
+                    <InputAdornment position="end">lb</InputAdornment>
+                  }
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                  onChange={(e) => setWeight(e.target.value)}
+                  value={weight}
+                />
+                <FormHelperText id="outlined-weight-helper-text">
+                  Weight
+                </FormHelperText>
+              </FormControl>
+              </Typography>     
+              <Typography>
+              <ToggleButtonGroup
               color="primary"
               value={gender}
               exclusive
@@ -151,6 +162,8 @@ export default function Signup() {
               <ToggleButton value="O">Other</ToggleButton>
               <ToggleButton value="P">Prefer Not To Say</ToggleButton>
             </ToggleButtonGroup>
+            </Typography>
+            <Typography>
             <Box sx={{p: 2}}>
               <TextField
                 id="outlined-number"
@@ -178,6 +191,8 @@ export default function Signup() {
                 onChange={(e) => setInches(e.target.value)}
               />
             </Box>
+            </Typography>
+            <Typography>
             <TextField
                 sx={{ mb: "20px" }}
                 type="number"
@@ -186,6 +201,11 @@ export default function Signup() {
                 value={phoneNum}
                 onChange={(e) => setPhoneNum(e.target.value)}
                 />
+            </Typography>
+              </Grid>
+            </Grid>
+
+
             <Button
               variant="contained"
               type="submit"
