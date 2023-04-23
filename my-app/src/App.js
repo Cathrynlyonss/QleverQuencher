@@ -8,7 +8,8 @@ import Navbar from './components/Navbar';
 import Login from './pages/login';
 import SignUp from './pages/signup';
 import Daily from './pages/daily';
-import ProtectedRoutes from './ProtectedRoutes';
+import  ProtectedRoutes from './ProtectedRoutes';
+import ProtectedRoutes1 from './ProtectedRoutes1';
 import Footer from './components/Footer';
 import { getAuth, signOut } from "firebase/auth";
 
@@ -36,7 +37,8 @@ class App extends React.Component {
           <Route path="/home" element={<Home />} />
           <Route element = {<ProtectedRoutes/>}> 
             <Route path="/weekly" element={<Weekly />} />
-          
+          </Route>
+          <Route element = {<ProtectedRoutes1/>}> 
             <Route path="/daily" element={<Daily />} />
           </Route>
           <Route path="/login" element={<Login />} />
