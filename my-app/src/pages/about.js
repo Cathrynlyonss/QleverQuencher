@@ -92,11 +92,9 @@ class about extends React.Component {
                     >
                       <p>
                         Hi! I'm Cathryn, a senior at the University of
-                        Washington studying Computer Science and Human Centered
-                        Design and Engineering. I'm passionate about creating
-                        technology that is accessible to everyone, and I'm
-                        excited to be a part of the team that is making that
-                        happen!
+                        Iowa studying Computer Science and Engineering. I helped create and design the 
+                        UI/UX for this project. I also aided with the security of our site
+                        by using Firebase. I hope you enjoy! Sip away!
                       </p>
                     </Typography>
                   </Grid>
