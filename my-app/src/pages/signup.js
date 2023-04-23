@@ -13,11 +13,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { db } from '../config/firebase.js'
+import { db } from "../config/firebase.js";
 import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore"; 
-import Grid from '@mui/material/Grid';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import Grid from "@mui/material/Grid";
 
 const theme = createTheme({
   palette: {
@@ -45,15 +45,16 @@ export default function Signup() {
   async function handleFormSubmit(e) {
     console.log("Form submitted");
     const auth = getAuth();
-    try{
-      createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        console.log("login successful")
-        console.log(getAuth().currentUser)
-        navigate("/daily")
-        // ...
-      });
+    try {
+      createUserWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
+          // Signed in
+          console.log("login successful");
+          console.log(getAuth().currentUser);
+          navigate("/daily");
+          // ...
+        }
+      );
 
       await setDoc(doc(db, "Users", email), {
         birthday: birthday,
@@ -64,15 +65,13 @@ export default function Signup() {
         phone: phoneNum,
         intakeAmount: [],
         intakeTime: [],
-        goalInOunces: 0
+        goalInOunces: 0,
       });
-
     } catch (error) {
       alert(`Cannot submit form: ${error.message}`);
     }
     //put other data in database with unique id being email
-    
-  };
+  }
 
   return (
     <div
@@ -88,18 +87,18 @@ export default function Signup() {
     >
       <ThemeProvider theme={theme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Typography
-              variant="h2"
-              component="div"
-              gutterBottom
-              align="center"
-            >
-              Signup
-            </Typography>
-            
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} pl= {74}>
-              <Grid item xs={2} sm={4} md={4}>
-                <Typography>
+          <Typography variant="h2" component="div" gutterBottom align="center">
+            Signup
+          </Typography>
+
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            pl={74}
+          >
+            <Grid item xs={2} sm={4} md={4}>
+              <Typography>
                 <TextField
                   sx={{ mb: "20px" }}
                   type="email"
@@ -108,115 +107,112 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                </Typography>
-                <Typography>
-                <TextField
-              sx={{ mb: "20px" }}
-              type="password"
-              label="Password"
-              variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            
-                </Typography>
-                <Typography>
-                <TextField
-              label="Birthday (MM/DD/YYYY)"
-              variant="outlined"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-              sx={{ mb: "20px" }}
-             />
-                </Typography>   
-                <Typography >
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  endAdornment={
-                    <InputAdornment position="end">lb</InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                  onChange={(e) => setWeight(e.target.value)}
-                  value={weight}
-                />
-                <FormHelperText id="outlined-weight-helper-text">
-                  Weight
-                </FormHelperText>
-              </FormControl>
-              </Typography>     
+              </Typography>
               <Typography>
-              <ToggleButtonGroup
-              color="primary"
-              value={gender}
-              exclusive
-              onChange={handleChange}
-              aria-label="Platform"
-              margin="20px"
-            >
-              <ToggleButton value="F">Female</ToggleButton>
-              <ToggleButton value="M">Male</ToggleButton>
-              <ToggleButton value="O">Other</ToggleButton>
-              <ToggleButton value="P">Prefer Not To Say</ToggleButton>
-            </ToggleButtonGroup>
-            </Typography>
-            <Typography>
-            <Box sx={{p: 2}}>
-              <TextField
-                id="outlined-number"
-                label="Feet"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                endAdornment={
-                  <InputAdornment position="Feet">lb</InputAdornment>
-                }
-                onChange = {(e) => setFeet(e.target.value)}
-                margin="20px"
-              />
-              <TextField
-                id="outlined-number"
-                label="Inches"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                endAdornment={
-                  <InputAdornment position="Inches">lb</InputAdornment>
-                }
-                onChange={(e) => setInches(e.target.value)}
-              />
-            </Box>
-            </Typography>
-            <Typography>
-            <TextField
-                sx={{ mb: "20px" }}
-                type="number"
-                label="Phone Number"
-                variant="outlined"
-                value={phoneNum}
-                onChange={(e) => setPhoneNum(e.target.value)}
+                <TextField
+                  sx={{ mb: "20px" }}
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-            </Typography>
-              </Grid>
+              </Typography>
+              <Typography>
+                <TextField
+                  label="Birthday (MM/DD/YYYY)"
+                  variant="outlined"
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  sx={{ mb: "20px" }}
+                />
+              </Typography>
+              <Typography>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <OutlinedInput
+                    id="outlined-adornment-weight"
+                    endAdornment={
+                      <InputAdornment position="end">lb</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                    onChange={(e) => setWeight(e.target.value)}
+                    value={weight}
+                  />
+                  <FormHelperText id="outlined-weight-helper-text">
+                    Weight
+                  </FormHelperText>
+                </FormControl>
+              </Typography>
+              <Typography>
+                <ToggleButtonGroup
+                  color="primary"
+                  value={gender}
+                  exclusive
+                  onChange={handleChange}
+                  aria-label="Platform"
+                  margin="20px"
+                >
+                  <ToggleButton value="F">Female</ToggleButton>
+                  <ToggleButton value="M">Male</ToggleButton>
+                  <ToggleButton value="O">Other</ToggleButton>
+                  <ToggleButton value="P">Prefer Not To Say</ToggleButton>
+                </ToggleButtonGroup>
+              </Typography>
+              <Typography>
+                <Box sx={{ p: 2 }}>
+                  <TextField
+                    id="outlined-number"
+                    label="Feet"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    endAdornment={
+                      <InputAdornment position="Feet">lb</InputAdornment>
+                    }
+                    onChange={(e) => setFeet(e.target.value)}
+                    margin="20px"
+                  />
+                  <TextField
+                    id="outlined-number"
+                    label="Inches"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    endAdornment={
+                      <InputAdornment position="Inches">lb</InputAdornment>
+                    }
+                    onChange={(e) => setInches(e.target.value)}
+                  />
+                </Box>
+              </Typography>
+              <Typography>
+                <TextField
+                  sx={{ mb: "20px" }}
+                  type="number"
+                  label="Phone Number"
+                  variant="outlined"
+                  value={phoneNum}
+                  onChange={(e) => setPhoneNum(e.target.value)}
+                />
+              </Typography>
             </Grid>
+          </Grid>
 
-
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ ml: "20px", p: "2px" }}
-              onClick={handleFormSubmit}
-            >
-              SignUp
-            </Button>
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ ml: "20px", p: "2px" }}
+            onClick={handleFormSubmit}
+          >
+            SignUp
+          </Button>
         </LocalizationProvider>
       </ThemeProvider>
     </div>
   );
 }
-
