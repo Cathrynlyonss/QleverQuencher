@@ -71,7 +71,7 @@ class about extends React.Component {
                                     </Grid>
                                     <Grid item xs={3}>
                                         <Typography variant="subtitle1" component="div" gutterBottom align='center'>
-                                            <p>Hi! I'm Kiana, a senior at the University of Washington studying Computer Science and Human Centered Design and Engineering. I'm passionate about creating technology that is accessible to everyone, and I'm excited to be a part of the team that is making that happen!</p>
+                                            <p>Hi! My name is Kiana and I'm a graduating senior from the University of Iowa majoring in Computer Science and Engineering. I helped design and create the user interface for this project and helped with keeping our site secure by using Firebase functions for authentication! </p>
                                         </Typography>
                                     </Grid>
                                 </Grid>
