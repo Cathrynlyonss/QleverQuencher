@@ -6,6 +6,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
+import { doc, updateDoc } from "firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { db } from '../config/firebase.js'
 
 const theme = createTheme({
     palette: {
@@ -18,9 +21,26 @@ const theme = createTheme({
   export default function Goals() {
 
     const [goalOunce, setGoalOunce] = React.useState(0);
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     const handleFormSubmit = (event) => {
         console.log("Submit");
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const uid = user.uid;
+                console.log(uid)
+                const email = user.email;
+                console.log(email)
+                const dbRef = doc(db, "Users", email);
+                await updateDoc(dbRef, {
+                    goalInOunces: goalOunce
+                  });
+            } else {
+                console.log("No user signed in")
+            }
+        });
       };
 
         return (
@@ -31,6 +51,7 @@ const theme = createTheme({
             height: '100vh',
             width: '100vw', 
             }} className='Page-cover'>
+                <ThemeProvider theme={theme}>
                 <Box sx={{p:5}}>
                     <Typography variant="h2" component="div" gutterBottom align='center'>
                         Hydration Goals
@@ -46,12 +67,13 @@ const theme = createTheme({
                     <Button
                     variant="contained"
                     type="submit"
-                    sx={{ ml: "20px", p: "2px" }}
+                    sx={{ ml: "20px", p: "4px" }}
                     onClick={handleFormSubmit}
                     >
-                        SignUp
+                        Submit
                     </Button>
                 </Box>
+                </ThemeProvider>
             </div>
         )
 }

@@ -15,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { db } from '../config/firebase.js'
 import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
 
 const theme = createTheme({
@@ -65,7 +65,8 @@ export default function Signup() {
         weight: weight,
         phone: phoneNum,
         intakeAmount: [],
-        intakeTime: []
+        intakeTime: [],
+        goalInOunces: 0
       });
 
     } catch (error) {
