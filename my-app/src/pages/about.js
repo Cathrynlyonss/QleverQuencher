@@ -133,7 +133,7 @@ class about extends React.Component {
                         Engineering. I helped design and create the user
                         interface for this project and helped with keeping our
                         site secure by using Firebase functions for
-                        authentication!{" "}
+                        authentication! Stay hydrated! {" "}
                       </p>
                     </Typography>
                   </Grid>
@@ -163,11 +163,9 @@ class about extends React.Component {
                       align="center"
                     >
                       <p>
-                        Hi! I'm Werner, a senior at the University of Washington
-                        studying Computer Science and Human Centered Design and
-                        Engineering. I'm passionate about creating technology
-                        that is accessible to everyone, and I'm excited to be a
-                        part of the team that is making that happen!
+                      Hi! I'm Werner and I am a senior studying Electrical Engineering 
+                      at the University of Iowa. I helped in the integration of the 
+                      hardware components for this project. Don't forget to drink water!
                       </p>
                     </Typography>
                   </Grid>
