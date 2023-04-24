@@ -3,34 +3,56 @@ import {Line} from 'react-chartjs-2';
 // import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
 import { db } from '../config/firebase.js'
-import { getDatabase, ref, onValue, update} from "firebase/database";
+import { getDatabase, ref, onValue, update, child, get} from "firebase/database";
 // import { reload } from 'firebase/auth';
 // import { render } from '@testing-library/react';
-
+import { addToGraph, removeFromGraph } from './weekly.js';
 
 const database = getDatabase();
+var dailyData = [];
+var dailySum = 0;
 
-const amountRef = ref(database, '/hi' );    
-var data = []
-var prevDays = []
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-const daysOfWeek = ['Sunday', 'Monday', 'Tuesday',
-'Wednesday', 'Thursday', 'Friday', 'Saturday']
+var day = ""
+//get initial value for day
+const dbRef = ref(getDatabase());
+get(child(dbRef, `dayofweek`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    day = daysOfWeek[snapshot.val()]
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
 
+//when more water has been consumed
 onValue(ref(database, '/waterConsumption' ), (snapshot) => {
-    data.push(snapshot.val());
-    console.log(data)
+    dailyData.push(snapshot.val());
+
+    //add to weekly bar graph for that day
+    addToGraph(day, dailySum)
+
 }); 
+
+// onValue(ref(database, '/dayofweek' ), (snapshot) => {
+//     prevDays = {x: daysOfWeek[snapshot.val()-1], y: data};
+//     data = [];
+
+//     var updates = {}
+//     updates['/prevDays'] = prevDays
+//     update(ref(database), updates)
+// }); 
+
 
 onValue(ref(database, '/dayofweek' ), (snapshot) => {
-    prevDays = {x: daysOfWeek[snapshot.val()-1], y: data};
-    data = [];
+    day = daysOfWeek[snapshot.val()]
+    dailyData = []
 
-    var updates = {}
-    console.log(prevDays)
-    updates['/prevDays'] = prevDays
-    update(ref(database), updates)
-}); 
+    //tell weekly to set new day data to 0
+    removeFromGraph(snapshot.val())
+});
 
 function getState(){
     const state = {
@@ -39,7 +61,7 @@ function getState(){
             label: 'Amount of Water Consumed',
             borderWidth: 1,
             //data: [{x: Date.now(), y: data}]
-            data: data
+            data: dailyData
           }
         ]
     }

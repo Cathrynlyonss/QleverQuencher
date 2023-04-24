@@ -16,7 +16,7 @@ export function generateFakeData(){
     //create fake data for 6 days of the week 
     for(var j = 0; j < 7; j++){
         //insert day you don;t want data for
-        if(j !== 5){
+        if(j !== 1){
             //create fake data for hours in the day
             for(var i = 0; i < 16; i++){
                 dayData.push({x: daysOfWeek[j], y: getRandomInt(0, 7)})

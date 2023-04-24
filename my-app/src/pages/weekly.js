@@ -6,18 +6,31 @@ import { getDatabase, ref, onValue} from "firebase/database";
 import { generateFakeData } from '../components/generateFakeData.js'
 
 const database = getDatabase();
-
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 var weekData = generateFakeData();
 var daysData = parseFakeData();
 
 var realWeekData = [];
 
 onValue(ref(database, '/prevDays' ), (snapshot) => {
-  realWeekData.push([(snapshot.val())]);
-  if (daysData.size > 7) {
-    daysData.shift()
-  }
+  console.log(snapshot.val())
+  // realWeekData.push([(snapshot.val())]);
+  // if (daysData.size > 7) {
+  //   daysData.shift()
+  // }
 }); 
+
+export function addToGraph(day, sum){
+  for(var i = 0; i< daysData.length; i++){
+    if(daysData[i].x == day){
+      daysData[i].y += sum
+    }
+  }
+}
+
+export function removeFromGraph(day){
+  daysData[day] = {x: daysOfWeek[day], y: 0}
+}
 
 function parseFakeData(){
   var dayData = []
@@ -64,9 +77,7 @@ function getState(){
     }
     
     return state
-  }
-  
-  
+  } 
 }
 
 
