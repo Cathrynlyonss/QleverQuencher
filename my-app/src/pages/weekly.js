@@ -3,29 +3,41 @@ import {Bar} from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import { db } from '../config/firebase.js'
 import { getDatabase, ref, onValue} from "firebase/database";
+import { generateFakeData } from '../components/generateFakeData.js'
 
 const database = getDatabase();
 
-var weekData = []
+var weekData = generateFakeData();
+var daysData = parseFakeData();
+
+var realWeekData = [];
+
 onValue(ref(database, '/prevDays' ), (snapshot) => {
-  weekData = [(snapshot.val())];
-  parseWeekData();
+  realWeekData.push([(snapshot.val())]);
   if (daysData.size > 7) {
     daysData.shift()
   }
 }); 
 
-var sum = 0
-var daysData = []
-function parseWeekData(){
+function parseFakeData(){
+  var dayData = []
+  var sum = 0
+  var day = ""
+  
   for(var i=0; i < weekData.length; i++){
-    sum += weekData[i].y[0].y
+    sum = 0;
+    for(var j = 0; j< weekData[i].length; j++){
+      sum += weekData[i][j].y
+      day = weekData[i][j].x
+    }
+    dayData.push({x: day, y: sum})
   }
-  daysData.push({x: weekData[0].x, y: sum})
+
+  return dayData
 }
 
 function getState(){
-  if (weekData !== []) {
+  if (weekData.length !== 0) {
     const state = {
       labels: ['Sunday', 'Monday', 'Tuesday',
                'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -33,7 +45,6 @@ function getState(){
         {
           label: 'Amount of Water Consumed',
           borderWidth: 1,
-          // data: [12, 19, 3, 5, 2, 3, 5]
           data: daysData
         }
       ]
@@ -47,11 +58,11 @@ function getState(){
         {
           label: 'Amount of Water Consumed',
           borderWidth: 1,
-          data: [12, 19, 3, 5, 2, 3, 5]
-          //data: weekData
+          data: [0, 0, 0, 0, 0, 0, 0]
         }
       ]
     }
+    
     return state
   }
   
