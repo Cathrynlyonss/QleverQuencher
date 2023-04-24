@@ -1,3 +1,10 @@
+//set up twilio for texting
+const accountSid = 'ACb75f516832e3fb47abfae14aa6a45dcc';
+const authToken = 'cb81b1969869d1751987d535fdb19392';
+const client = require('twilio')(accountSid, authToken);
+var timeOfSip = Date.now();
+
+
 //set up firebase
 var firebase = require( 'firebase/app' );
 const { getDatabase, ref, onValue, set, update, get } = require('firebase/database');
@@ -66,14 +73,14 @@ async function main( )
         console.log('Received: ' + buffer.toString());
 
         var updates = {}
-        updates['/weight'] = parseInt(buffer);
 
+        //get time and day of week
         var today = new Date()
-        var time = Date.now()
-        updates['/time'] = time
+        timeOfSip = Date.now()
         updates['/dayofweek'] = today.getDay()
 
-        vartoSend = {y:parseInt(buffer), x:time}
+        //send weight and time
+        vartoSend = {y:parseInt(buffer), x:timeOfSip}
         updates['/waterConsumption'] = vartoSend
         
         //send updated info to db
@@ -106,6 +113,28 @@ async function main( )
             console.log('Sent: ' + inStr);
         });
     });
+
+    //function for sending text if a sip hasn't been taken in 30 secs
+    async function sendText(){
+
+        //see if time elapsed since sip is 30 seconds
+        if (Date.now() - timeOfSip > 30000 ){
+            client.messages
+                .create({
+                    body: "You haven't taken a sip for 30 seconds. Remember to drink more water so you can meet your goals! You got this :) - QleverQuencher",
+                    from: '+18559375076',
+                    to: '+18479177782'
+                })
+                .then(message => console.log(message.sid));
+
+                //reset timer    
+                timeOfSip = Date.now();
+            }
+    }
+
+    //call sendText
+    setInterval(sendText, 1000);
+    
 }
 
 main().then((ret) =>
