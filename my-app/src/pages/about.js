@@ -57,7 +57,8 @@ class about extends React.Component {
                         For this project, I implemented all hardware and components 
                         that were collecting, sending, and receiving data via
                         various protocols and helped ensure the data ended up in
-                        the database in a meaningful way.
+                        the database in a meaningful way. I also implemented all of
+                        the texting functionality. Don't drown!
                       </p>
                     </Typography>
                   </Grid>
