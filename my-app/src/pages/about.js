@@ -1,24 +1,18 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import backgroundImg from "../img/splash1.jpeg";
 import Grid from "@mui/material/Grid";
 import Cathryn from "../img/cathryn.jpeg";
 import Kiana from "../img/kiana.png";
 import Abigail from "../img/abigail.JPG";
 import Werner from "../img/werner.png";
+import Divider from "@mui/material/Divider";
+import OpacityIcon from "@mui/icons-material/Opacity";
 
 class about extends React.Component {
   render() {
     return (
-      <div
-        style={{
-          backgroundColor: "#A7D0F6",
-          width: "auto",
-          height: "auto",
-        }}
-        className="Page-cover"
-      >
+      <div>
         <Grid
           container
           spacing={{ xs: 2, md: 7 }}
@@ -28,16 +22,17 @@ class about extends React.Component {
             <Box sx={{ p: 2, bgcolor: "background.paper" }}>
               <Typography
                 variant="h3"
-                component="div"
-                gutterBottom
                 align="center"
               >
+                <OpacityIcon sx={{ fontSize: 40 }} color="primary" />
                 About Us
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={2} sm={4} md={10}>
-            <Box sx={{ p: 1, bgcolor: "background.paper" }}>
+            <Box sx={{ p: 3 }}>
+            <Divider />
+            <br></br>
               <Typography
                 variant="h4"
                 component="div"
@@ -71,7 +66,9 @@ class about extends React.Component {
             </Box>
           </Grid>
           <Grid item xs={2} sm={4} md={10}>
-            <Box sx={{ p: 1, bgcolor: "background.paper" }}>
+            <Box sx={{ p: 3, bgcolor: "background.paper" }}>
+            <Divider />
+            <br></br>
               <Typography
                 variant="h4"
                 component="div"
@@ -111,7 +108,9 @@ class about extends React.Component {
             </Box>
           </Grid>
           <Grid item xs={2} sm={4} md={10}>
-            <Box sx={{ p: 1, bgcolor: "background.paper" }}>
+            <Box sx={{ p: 3, bgcolor: "background.paper" }}>
+            <Divider />
+            <br></br>
               <Typography
                 variant="h4"
                 component="div"
@@ -145,7 +144,8 @@ class about extends React.Component {
             </Box>
           </Grid>
           <Grid item xs={2} sm={4} md={10}>
-            <Box sx={{ p: 1, bgcolor: "background.paper" }}>
+            <Divider />
+            <Box sx={{ p: 3, bgcolor: "background.paper" }}>
               <Typography
                 variant="h4"
                 component="div"
