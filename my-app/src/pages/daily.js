@@ -7,16 +7,19 @@ import { getDatabase, ref, onValue, update, child, get} from "firebase/database"
 // import { reload } from 'firebase/auth';
 // import { render } from '@testing-library/react';
 import { addToGraph, removeFromGraph } from './weekly.js';
+import { generateFakeDailyData } from '../components/generateFakeData.js';
+import { fakeDailySum } from '../components/generateFakeData.js';
 
 const database = getDatabase();
-var dailyData = [];
-var dailySum = 0;
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 var day = ""
-//get initial value for day
+var dailyData = generateFakeDailyData();
+var dailySum = 0
+
 const dbRef = ref(getDatabase());
+//get initial value for day for when server first starts up
 get(child(dbRef, `dayofweek`)).then((snapshot) => {
   if (snapshot.exists()) {
     day = daysOfWeek[snapshot.val()]
@@ -28,33 +31,25 @@ get(child(dbRef, `dayofweek`)).then((snapshot) => {
 });
 
 //when more water has been consumed
-onValue(ref(database, '/waterConsumption' ), (snapshot) => {
-    dailyData.push(snapshot.val());
+// onValue(ref(database, '/waterConsumption' ), (snapshot) => {
+//     dailyData.push(snapshot.val());
 
-    //add to weekly bar graph for that day
-    addToGraph(day, dailySum)
+//     //add to weekly bar graph for that day
+//     addToGraph(day, dailySum)
 
-}); 
-
-// onValue(ref(database, '/dayofweek' ), (snapshot) => {
-//     prevDays = {x: daysOfWeek[snapshot.val()-1], y: data};
-//     data = [];
-
-//     var updates = {}
-//     updates['/prevDays'] = prevDays
-//     update(ref(database), updates)
 // }); 
 
+// onValue(ref(database, '/dayofweek' ), (snapshot) => {
+//     day = daysOfWeek[snapshot.val()]
+//     dailyData = []
 
-onValue(ref(database, '/dayofweek' ), (snapshot) => {
-    day = daysOfWeek[snapshot.val()]
-    dailyData = []
+//     //tell weekly to set new day data to 0
+//     //removeFromGraph(snapshot.val())
+// });
 
-    //tell weekly to set new day data to 0
-    removeFromGraph(snapshot.val())
-});
-
+//function so that graph can change dynamically
 function getState(){
+  console.log(dailyData)
     const state = {
         datasets: [
           {
@@ -99,6 +94,11 @@ export default class graph extends React.Component {
                         },
                     }}
                 />
+            </div>
+            <div>
+              <h2>
+                Total Daily Consumption: { fakeDailySum } oz.
+              </h2>
             </div>
         </center>
         
