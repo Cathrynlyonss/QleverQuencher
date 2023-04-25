@@ -42,6 +42,7 @@ const int LOADCELL_SCK_PIN = 3;
 
 HX711 scale;
 
+long pastreading = 0;
 
 
 void setup(void)
@@ -60,6 +61,7 @@ void setup(void)
   scale.tare(299);
   delay(500);
   Serial.println("Scale is setup!");
+  pastreading = scale.get_units(10);
 
   //setup bluetooth
   if ( !ble.begin(VERBOSE_MODE) )
@@ -112,12 +114,20 @@ void loop(void)
       if (scale.is_ready()){
         delay(1000);
         long reading = scale.get_units(10);
-        Serial.print("Weight: ");
-        Serial.println(reading);
+        long sipSize = (pastreading - reading);//*0.035274;
+        
+        //Serial.print("Weight: ");
+        //Serial.println(reading);
+        
+        Serial.print("Sip Size: ");
+        Serial.println(sipSize);
   
-        //send weight reading to pi
+        //send sip size to pi
         ble.print("AT+BLEUARTTX=");
-        ble.println(reading);
+        ble.println(sipSize);
+
+        //set past reading to be most recent
+        pastreading = reading;
         
         // check response status
         if (! ble.waitForOK() ) {
