@@ -28,7 +28,7 @@ void loop() {
  
 
         //check if sip taken - what is threshold?
-        if( abs(x)>3 or abs(y)>3 or abs(z)>3 ) {
+        if( abs(x)>5 or abs(y)>5 or abs(z)>5 ) {
           IMU.readGyroscope(x, y, z);
 
           while( abs(x)>1 or abs(y)>1 or abs(z)>1 ){
