@@ -12,7 +12,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { db } from "../config/firebase.js";
+import { db, database } from "../config/firebase.js";
+import { ref, set, update } from "firebase/database";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,11 @@ export default function Goals() {
         console.log("No user signed in");
       }
     });
+    update(ref(database, '/'), {
+      goalInOunces: goalOunce,
+    });
+    //print out values to console
+    console.log("Updated goal to  %f", goalOunce);
   };
 
   const handleActivitySubmit = (event) => {
@@ -64,7 +70,9 @@ export default function Goals() {
         console.log("No user signed in");
       }
     });
+    console.log("Activity Level: " + activityLevel);
   };
+
 
   const getOuncesRecommended = () => {
     //get user's weight and activity level
@@ -128,7 +136,7 @@ export default function Goals() {
           </Button>
         </Box>
         <Typography variant="sh2" component="div" gutterBottom align="center">
-          Recommended Ounces Per Day: {getOuncesRecommended()}
+          Recommended Ounces Per Day:{getOuncesRecommended()}
         </Typography>
       </ThemeProvider>
     </div>
