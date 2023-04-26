@@ -15,7 +15,7 @@ const database = getDatabase();
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 var day = ""
-var dailyData = generateFakeDailyData();
+var dailyData = [] //generateFakeDailyData();
 var dailySum = 0
 
 const dbRef = ref(getDatabase());
@@ -31,21 +31,24 @@ get(child(dbRef, `dayofweek`)).then((snapshot) => {
 });
 
 //when more water has been consumed
-// onValue(ref(database, '/waterConsumption' ), (snapshot) => {
-//     dailyData.push(snapshot.val());
+onValue(ref(database, '/waterConsumption' ), (snapshot) => {
+  console.log(snapshot.val())
+  if (snapshot.val().y >= 0){
+    dailyData.push(snapshot.val());
+      
+    //add to weekly bar graph for that day
+    dailySum += snapshot.val().y
+    addToGraph(day, snapshot.val().y)
+  }
+}); 
 
-//     //add to weekly bar graph for that day
-//     addToGraph(day, dailySum)
+onValue(ref(database, '/dayofweek' ), (snapshot) => {
+    day = daysOfWeek[snapshot.val()]
+    dailyData = []
 
-// }); 
-
-// onValue(ref(database, '/dayofweek' ), (snapshot) => {
-//     day = daysOfWeek[snapshot.val()]
-//     dailyData = []
-
-//     //tell weekly to set new day data to 0
-//     //removeFromGraph(snapshot.val())
-// });
+    //tell weekly to set new day data to 0
+    //removeFromGraph(snapshot.val())
+});
 
 //function so that graph can change dynamically
 function getState(){
@@ -76,6 +79,12 @@ export default class graph extends React.Component {
                         scales: {
                             y: {
                                 beginAtZero: true,
+                                ticks: {
+                                  beginAtZero:true,
+                                  callback: function(value, index, values) {
+                                          return value + 'oz';
+                                  }
+                              },
                                 title: {
                                     display: true,
                                     text: 'Amount of Water Consumed'
@@ -97,12 +106,10 @@ export default class graph extends React.Component {
             </div>
             <div>
               <h2>
-                Total Daily Consumption: { fakeDailySum } oz.
+                Total Daily Consumption: { dailySum } oz.
               </h2>
             </div>
         </center>
-        
-      
     );
   }
 }
