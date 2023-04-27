@@ -1,6 +1,5 @@
 //set up twilio for texting
 const accountSid = 'ACb75f516832e3fb47abfae14aa6a45dcc';
-const authToken = 'cb81b1969869d1751987d535fdb19392';
 const client = require('twilio')(accountSid, authToken);
 var timeOfSip = Date.now();
 
@@ -80,7 +79,7 @@ async function main( )
         updates['/dayofweek'] = today.getDay()
 
         //send weight and time
-        vartoSend = {y:parseInt(buffer), x:timeOfSip}
+        vartoSend = {y:parseInt(buffer)*0.035274, x:timeOfSip}
         updates['/waterConsumption'] = vartoSend
         
         //send updated info to db
@@ -117,11 +116,11 @@ async function main( )
     //function for sending text if a sip hasn't been taken in 30 secs
     async function sendText(){
 
-        //see if time elapsed since sip is 30 seconds
-        if (Date.now() - timeOfSip > 30000 ){
+        //see if time elapsed since sip is 30 minutes
+        if (Date.now() - timeOfSip > 1800000 ){
             client.messages
                 .create({
-                    body: "You haven't taken a sip for 30 seconds. Remember to drink more water so you can meet your goals! You got this :) - QleverQuencher",
+                    body: "You haven't taken a sip for 30 minutes. Remember to drink more water so you can meet your goals! You got this :) - QleverQuencher",
                     from: '+18559375076',
                     to: '+18479177782'
                 })
