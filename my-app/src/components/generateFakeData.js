@@ -21,7 +21,7 @@ export function generateFakeData(){
     //create fake data for 6 days of the week 
     for(var j = 0; j < 7; j++){
         //insert day you don;t want data for
-        if(j !== 2){
+        if(j !== 4 && j !== 5 && j !== 6){
             //create fake data for hours in the day
             for(var i = 0; i < 16; i++){
                 dayData.push({x: daysOfWeek[j], y: getRandomInt(0, 7)})
@@ -50,7 +50,7 @@ export function generateFakeDailyData(){
         dayData.push({x: time, y: num})
         sum += num
     }
-    addToGraph('Tuesday', sum)
+    addToGraph('Thursday', sum)
     fakeDailySum = sum
 
     return dayData

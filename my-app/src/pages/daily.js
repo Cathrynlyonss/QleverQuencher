@@ -9,14 +9,15 @@ import { getDatabase, ref, onValue, update, child, get} from "firebase/database"
 import { addToGraph, removeFromGraph } from './weekly.js';
 import { generateFakeDailyData } from '../components/generateFakeData.js';
 import { fakeDailySum } from '../components/generateFakeData.js';
+import { getAuth } from "firebase/auth";
 
 const database = getDatabase();
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 var day = ""
-var dailyData = [] //generateFakeDailyData();
-var dailySum = 0
+var dailyData = generateFakeDailyData();
+var dailySum = fakeDailySum;
 
 const dbRef = ref(getDatabase());
 //get initial value for day for when server first starts up
@@ -31,24 +32,24 @@ get(child(dbRef, `dayofweek`)).then((snapshot) => {
 });
 
 //when more water has been consumed
-onValue(ref(database, '/waterConsumption' ), (snapshot) => {
-  console.log(snapshot.val())
-  if (snapshot.val().y >= 0){
-    dailyData.push(snapshot.val());
+// onValue(ref(database, '/waterConsumption' ), (snapshot) => {
+//   console.log(snapshot.val())
+//   if (snapshot.val().y >= 0){
+//     dailyData.push(snapshot.val());
       
-    //add to weekly bar graph for that day
-    dailySum += snapshot.val().y
-    addToGraph(day, snapshot.val().y)
-  }
-}); 
+//     //add to weekly bar graph for that day
+//     dailySum += snapshot.val().y
+//     addToGraph(day, snapshot.val().y)
+//   }
+// }); 
 
-onValue(ref(database, '/dayofweek' ), (snapshot) => {
-    day = daysOfWeek[snapshot.val()]
-    dailyData = []
+// onValue(ref(database, '/dayofweek' ), (snapshot) => {
+//     day = daysOfWeek[snapshot.val()]
+//     dailyData = []
 
-    //tell weekly to set new day data to 0
-    //removeFromGraph(snapshot.val())
-});
+//     //tell weekly to set new day data to 0
+//     //removeFromGraph(snapshot.val())
+// });
 
 //function so that graph can change dynamically
 function getState(){
@@ -64,6 +65,23 @@ function getState(){
         ]
     }
     return state
+}
+
+
+var goal = 0
+onValue(ref(database, '/goalInOunces' ), (snapshot) => {
+    goal = parseInt(snapshot.val())
+});
+
+var color = ""
+function getColor() {
+  if (dailySum >= goal) {
+    color = "limegreen";
+  } else {
+    color = "black";
+  }
+
+  return color
 }
 
 export default class graph extends React.Component {
@@ -105,10 +123,15 @@ export default class graph extends React.Component {
                 />
             </div>
             <div>
-              <h2>
+              <h2 style={{ color: getColor() }}>
                 Total Daily Consumption: { dailySum } oz.
               </h2>
             </div>
+            {(color == "limegreen") && <div>
+              <h3 style={{color: "limegreen"}}>
+                Congratulations! You met your daily water intake goal!
+              </h3>
+            </div>}
         </center>
     );
   }
