@@ -84,7 +84,7 @@ export default function Login() {
           <Grid item xs={2} sm={4} md={4}>
             <Typography>
               <TextField
-                sx={{ mb: "20px" }}
+                sx={{ mb: "20px" , ml: "10px",width: "28ch" }}
                 type="email"
                 label="Email"
                 variant="outlined"
@@ -93,7 +93,7 @@ export default function Login() {
               />
             </Typography>
             <Typography>
-              <FormControl sx={{ m: 1, width: "28ch" }} variant="outlined">
+              <FormControl sx={{ m: 1, width: "28ch" , ml: "10px"}} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
@@ -126,7 +126,7 @@ export default function Login() {
         <Button
           variant="contained"
           type="submit"
-          sx={{ ml: "20px" }}
+          sx={{ ml: "20px", mt: "20px"}}
           onClick={handleFormSubmit}
         >
           Login

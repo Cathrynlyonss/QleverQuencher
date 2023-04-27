@@ -36,6 +36,7 @@ export default function Signup() {
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = React.useState(null);
   const [phoneNum, setPhoneNum] = useState(undefined);
+  const [bottleNum, setBottleNum] = useState(0);
   const navigate = useNavigate();
 
   const handleChange = (event, newAlignment) => {
@@ -63,6 +64,7 @@ export default function Signup() {
         inches: inches,
         weight: weight,
         phone: phoneNum,
+        bottle: bottleNum,
         intakeAmount: [],
         intakeTime: [],
         goalInOunces: 0,
@@ -199,6 +201,16 @@ export default function Signup() {
                   variant="outlined"
                   value={phoneNum}
                   onChange={(e) => setPhoneNum(e.target.value)}
+                />
+              </Typography>
+              <Typography>
+                <TextField
+                  sx={{ mb: "20px" }}
+                  type="number"
+                  label="Bottle Number"
+                  variant="outlined"
+                  value={bottleNum}
+                  onChange={(e) => setBottleNum(e.target.value)}
                 />
               </Typography>
             </Grid>

@@ -23,7 +23,7 @@ onValue(ref(database, '/prevDays' ), (snapshot) => {
 export function addToGraph(day, sum){
   console.log('adding to graph')
   for(var i = 0; i< daysData.length; i++){
-    if(daysData[i].x == day){
+    if(daysData[i].x === day){
       daysData[i].y += sum
     }
 
@@ -96,9 +96,15 @@ export default class graph extends React.Component {
                       maintainAspectRatio: false,
                       scales: {
                           y: {
-                            beginAtZero: true
-                          }
-                      },
+                            beginAtZero: true,
+                            ticks: {
+                              beginAtZero:true,
+                              callback: function(value, index, values) {
+                                      return value + 'oz';
+                              }
+                            }
+                          },
+                        }
                   }}
                 />
             </div>
