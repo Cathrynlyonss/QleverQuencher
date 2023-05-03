@@ -52,7 +52,7 @@ export default function Signup() {
           // Signed in
           console.log("login successful");
           console.log(getAuth().currentUser);
-          navigate("/daily");
+          navigate("/home");
           // ...
         }
       );

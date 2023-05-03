@@ -7,17 +7,17 @@ import { generateFakeData } from '../components/generateFakeData.js'
 
 const database = getDatabase();
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-var weekData = generateFakeData();
-var daysData = parseFakeData();
+var weekData = []//generateFakeData();
+var daysData = []//parseFakeData();
 
 var realWeekData = [];
 
 onValue(ref(database, '/prevDays' ), (snapshot) => {
   console.log(snapshot.val())
-  // realWeekData.push([(snapshot.val())]);
-  // if (daysData.size > 7) {
-  //   daysData.shift()
-  // }
+  weekData.push([(snapshot.val())]);
+  if (daysData.size > 7) {
+    daysData.shift()
+  }
 }); 
 
 export function addToGraph(day, sum){
